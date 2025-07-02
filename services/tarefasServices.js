@@ -5,12 +5,12 @@ async function listarQuerry(){
    return resultado;
 }
 async function criarQuerry({titulo, descricao, status, prioridade, data_entrega}) {
-   const query = 'INSERT INTO tarefas (titulo, descricao, status, prioridade, data_entrega) ' + 'VALUES (?, ?, ?, ?, ?)';
+   const query = 'INSERT INTO tarefas (Titulo, Descricao, status, prioridade, data_entrega) ' + 'VALUES (?, ?, ?, ?, ?)';
    await db.query(query, [titulo, descricao, status, prioridade, data_entrega]);
 }
 
 async function atualizarQuerry(id, {titulo, descricao, status, prioridade, data_entrega}) {
-   const query = 'UPDATE tarefas SET titulo = ?, descricao = ?, status = ?, prioridade = ?, data_entrega = ? ' + ' WHERE id = ?';
+   const query = 'UPDATE tarefas SET Titulo = ?, Descricao = ?, status = ?, prioridade = ?, data_entrega = ? ' + ' WHERE id = ?';
    const [resultado] = await db.query(query, [titulo, descricao, status, prioridade, data_entrega, id]);
    return resultado;
 }

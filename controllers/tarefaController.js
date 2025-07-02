@@ -1,18 +1,21 @@
-const tarefasServices =require('../services/tarefasServices');
+const tarefasServices = require('../services/tarefasServices');
 
-async function listarTarefas(req,res){
-  try{
+async function listarTarefas(req, res) {
+  try {
     const tarefas = await tarefasServices.listarQuerry();
     res.status(200).json(tarefas)
-  } catch(erro){
-    res.status(500).json({erro: 'Erro ao buscar tarefas'});
+  } catch (erro) {
+    res.status(500).json({ erro: 'Erro ao buscar tarefas' });
   }
 }
 
 async function criarTarefa(req, res) {
   try {
-    const { descricao } = req.body;
-    await tarefasServices.criarQuerry(descricao);
+    const { titulo, descricao, status, prioridade, data_entrega } = req.body;
+    if (!titulo || !descricao) {
+      return res.status(400).json({ erro: 'Campos obrigatórios não informados' });
+    }
+    await tarefasServices.criarQuerry({ titulo, descricao, status, prioridade, data_entrega });
     res.status(201).json({ message: 'Tarefa criada com sucesso' });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro ao criar tarefa' });
